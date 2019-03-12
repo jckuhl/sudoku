@@ -4,12 +4,18 @@ import { Context } from './context';
 
 const Square = styled.div`
     border: 1px solid black;
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const SquareInput = styled.input`
     width: 100%;
     height: 100%;
     border: none;
+    font-size: 1rem;
     text-align: center;
 
     &::-webkit-outer-spin-button,
@@ -31,16 +37,16 @@ export default function GridInput({ position }) {
         const value = inputRef.current.value;
         actions.addCellValue({value, ...position});
     }
-    
+
     return (
         <Square>
+            {position.readOnly ? position.value :
             <SquareInput type="number"
                 invalid={position.invalid}
                 maxLength="1" ref={inputRef} 
                 onInput={setCellValue}
-                value={position.value}
-                readOnly={position.readOnly}
                 />
+            }
         </Square>
     );
 }
